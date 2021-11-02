@@ -188,7 +188,7 @@ test(testCase, async (t: Test) => {
     .contractAddress as string;
 
   t.comment("Approve 10 Tokens to HashTimeLockAddress");
-  const approveTokensOutput = await besuConnectorApi.invokeContractV1({
+  const approveTokensOutput = await besuConnectorApi.invokeContractKeychainV1({
     contractName: TestTokenJSON.contractName,
     keychainId,
     signingCredential: web3SigningCredential,
@@ -204,7 +204,7 @@ test(testCase, async (t: Test) => {
   );
 
   t.comment("Get account balance");
-  const responseBalance = await besuConnectorApi.invokeContractV1({
+  const responseBalance = await besuConnectorApi.invokeContractKeychainV1({
     contractName: TestTokenJSON.contractName,
     keychainId,
     signingCredential: web3SigningCredential,
@@ -219,7 +219,7 @@ test(testCase, async (t: Test) => {
   );
 
   t.comment("Get HashTimeLock contract and account allowance");
-  const allowanceOutput = await besuConnectorApi.invokeContractV1({
+  const allowanceOutput = await besuConnectorApi.invokeContractKeychainV1({
     contractName: TestTokenJSON.contractName,
     keychainId,
     signingCredential: web3SigningCredential,

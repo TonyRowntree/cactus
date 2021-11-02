@@ -9,7 +9,7 @@ import {
   IPluginLedgerConnectorBesuOptions,
   ReceiptType,
   RunTransactionRequest,
-  InvokeContractV1Request,
+  InvokeContractKeychainV1Request,
   EthContractInvocationType,
   DeployContractSolidityBytecodeV1Request,
   SignTransactionRequest,
@@ -146,7 +146,7 @@ test(testCase, async (t: Test) => {
   await connector.registerWebServices(expressApp, wsApi);
 
   const fDeploy = "deployContractSolBytecodeV1";
-  const fInvoke = "invokeContractV1";
+  const fInvoke = "invokeContractKeychainV1";
   const fRun = "runTransactionV1";
   const fSign = "signTransactionV1";
   const fBalance = "getBalanceV1";
@@ -273,8 +273,8 @@ test(testCase, async (t: Test) => {
         type: Web3SigningCredentialType.PrivateKeyHex,
       },
     };
-    const res = await apiClient.invokeContractV1(
-      parameters as InvokeContractV1Request,
+    const res = await apiClient.invokeContractKeychainV1(
+      parameters as InvokeContractKeychainV1Request,
     );
     t2.ok(res, "Contract deployed successfully");
     t2.ok(res.data);
@@ -300,8 +300,8 @@ test(testCase, async (t: Test) => {
           type: Web3SigningCredentialType.PrivateKeyHex,
         },
       };
-      await apiClient.invokeContractV1(
-        (parameters as any) as InvokeContractV1Request,
+      await apiClient.invokeContractKeychainV1(
+        (parameters as any) as InvokeContractKeychainV1Request,
       );
     } catch (e) {
       t2.equal(
@@ -337,7 +337,9 @@ test(testCase, async (t: Test) => {
         },
         fake: 4,
       };
-      await apiClient.invokeContractV1(parameters as InvokeContractV1Request);
+      await apiClient.invokeContractKeychainV1(
+        parameters as InvokeContractKeychainV1Request,
+      );
     } catch (e) {
       t2.equal(
         e.response.status,

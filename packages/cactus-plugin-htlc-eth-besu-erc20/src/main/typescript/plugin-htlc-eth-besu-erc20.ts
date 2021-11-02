@@ -11,7 +11,7 @@ import {
 import { Checks, LogLevelDesc } from "@hyperledger/cactus-common";
 import {
   EthContractInvocationType,
-  InvokeContractV1Response,
+  InvokeContractKeychainV1Response,
   PluginLedgerConnectorBesu,
   RunTransactionResponse,
 } from "@hyperledger/cactus-plugin-ledger-connector-besu";
@@ -170,7 +170,7 @@ export class PluginHtlcEthBesuErc20
 
   public async newContract(
     newContractRequest: NewContractRequest,
-  ): Promise<InvokeContractV1Response> {
+  ): Promise<InvokeContractKeychainV1Response> {
     const params = [
       newContractRequest.inputAmount,
       newContractRequest.outputAmount,
@@ -186,7 +186,7 @@ export class PluginHtlcEthBesuErc20
       (plugin) => plugin.getInstanceId() == newContractRequest.connectorId,
     ) as PluginLedgerConnectorBesu;
 
-    const result = await connector.invokeContract({
+    const result = await connector.invokeContractKeychain({
       contractName: HashTimeLockJSON.contractName,
       keychainId: newContractRequest.keychainId,
       signingCredential: newContractRequest.web3SigningCredential,
@@ -202,12 +202,12 @@ export class PluginHtlcEthBesuErc20
 
   public async refund(
     refundRequest: RefundRequest,
-  ): Promise<InvokeContractV1Response> {
+  ): Promise<InvokeContractKeychainV1Response> {
     const connector = this.pluginRegistry.plugins.find(
       (plugin) => plugin.getInstanceId() == refundRequest.connectorId,
     ) as PluginLedgerConnectorBesu;
 
-    const result = await connector.invokeContract({
+    const result = await connector.invokeContractKeychain({
       contractName: HashTimeLockJSON.contractName,
       keychainId: refundRequest.keychainId,
       signingCredential: refundRequest.web3SigningCredential,
@@ -222,12 +222,12 @@ export class PluginHtlcEthBesuErc20
 
   public async withdraw(
     withdrawRequest: WithdrawRequest,
-  ): Promise<InvokeContractV1Response> {
+  ): Promise<InvokeContractKeychainV1Response> {
     const connector = this.pluginRegistry.plugins.find(
       (plugin) => plugin.getInstanceId() == withdrawRequest.connectorId,
     ) as PluginLedgerConnectorBesu;
     const params = [withdrawRequest.id, withdrawRequest.secret];
-    const result = await connector.invokeContract({
+    const result = await connector.invokeContractKeychain({
       contractName: HashTimeLockJSON.contractName,
       keychainId: withdrawRequest.keychainId,
       signingCredential: withdrawRequest.web3SigningCredential,
@@ -242,12 +242,12 @@ export class PluginHtlcEthBesuErc20
 
   public async getSingleStatus(
     req: GetSingleStatusRequest,
-  ): Promise<InvokeContractV1Response> {
+  ): Promise<InvokeContractKeychainV1Response> {
     const connector = this.pluginRegistry.plugins.find(
       (plugin) => plugin.getInstanceId() == req.connectorId,
     ) as PluginLedgerConnectorBesu;
 
-    const result = await connector.invokeContract({
+    const result = await connector.invokeContractKeychain({
       contractName: HashTimeLockJSON.contractName,
       signingCredential: req.web3SigningCredential,
       invocationType: EthContractInvocationType.Call,
@@ -260,12 +260,12 @@ export class PluginHtlcEthBesuErc20
 
   public async getStatus(
     req: GetStatusRequest,
-  ): Promise<InvokeContractV1Response> {
+  ): Promise<InvokeContractKeychainV1Response> {
     const connector = this.pluginRegistry.plugins.find(
       (plugin) => plugin.getInstanceId() == req.connectorId,
     ) as PluginLedgerConnectorBesu;
 
-    const result = await connector.invokeContract({
+    const result = await connector.invokeContractKeychain({
       contractName: HashTimeLockJSON.contractName,
       signingCredential: req.web3SigningCredential,
       invocationType: EthContractInvocationType.Call,

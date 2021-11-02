@@ -496,10 +496,10 @@ export interface GetBalanceV1Response {
 export interface GetBesuRecordV1Request {
     /**
      * 
-     * @type {InvokeContractV1Request}
+     * @type {InvokeContractKeychainV1Request}
      * @memberof GetBesuRecordV1Request
      */
-    invokeCall?: InvokeContractV1Request;
+    invokeCall?: InvokeContractKeychainV1Request;
     /**
      * 
      * @type {string}
@@ -637,116 +637,116 @@ export interface GetTransactionV1Response {
 /**
  * 
  * @export
- * @interface InvokeContractV1Request
+ * @interface InvokeContractKeychainV1Request
  */
-export interface InvokeContractV1Request {
+export interface InvokeContractKeychainV1Request {
     /**
      * 
      * @type {string}
-     * @memberof InvokeContractV1Request
+     * @memberof InvokeContractKeychainV1Request
      */
     contractName: string;
     /**
      * 
      * @type {Web3SigningCredential}
-     * @memberof InvokeContractV1Request
+     * @memberof InvokeContractKeychainV1Request
      */
     signingCredential: Web3SigningCredential;
     /**
      * 
      * @type {EthContractInvocationType}
-     * @memberof InvokeContractV1Request
+     * @memberof InvokeContractKeychainV1Request
      */
     invocationType: EthContractInvocationType;
     /**
      * The name of the contract method to invoke.
      * @type {string}
-     * @memberof InvokeContractV1Request
+     * @memberof InvokeContractKeychainV1Request
      */
     methodName: string;
     /**
      * The list of arguments to pass in to the contract method being invoked.
      * @type {Array<any>}
-     * @memberof InvokeContractV1Request
+     * @memberof InvokeContractKeychainV1Request
      */
     params: Array<any>;
     /**
      * The application binary interface of the solidity contract, optional parameter
      * @type {Array<any>}
-     * @memberof InvokeContractV1Request
+     * @memberof InvokeContractKeychainV1Request
      */
     contractAbi?: Array<any>;
     /**
      * Address of the solidity contract, optional parameter
      * @type {string}
-     * @memberof InvokeContractV1Request
+     * @memberof InvokeContractKeychainV1Request
      */
     contractAddress?: string;
     /**
      * 
      * @type {string | number}
-     * @memberof InvokeContractV1Request
+     * @memberof InvokeContractKeychainV1Request
      */
     value?: string | number;
     /**
      * 
      * @type {string | number}
-     * @memberof InvokeContractV1Request
+     * @memberof InvokeContractKeychainV1Request
      */
     gas?: string | number;
     /**
      * 
      * @type {string | number}
-     * @memberof InvokeContractV1Request
+     * @memberof InvokeContractKeychainV1Request
      */
     gasPrice?: string | number;
     /**
      * 
      * @type {number}
-     * @memberof InvokeContractV1Request
+     * @memberof InvokeContractKeychainV1Request
      */
     nonce?: number;
     /**
      * The amount of milliseconds to wait for a transaction receipt beforegiving up and crashing. Only has any effect if the invocation type is SEND
      * @type {number}
-     * @memberof InvokeContractV1Request
+     * @memberof InvokeContractKeychainV1Request
      */
     timeoutMs?: number;
     /**
      * The keychainId for retrieve the contracts json.
      * @type {string}
-     * @memberof InvokeContractV1Request
+     * @memberof InvokeContractKeychainV1Request
      */
     keychainId?: string;
     /**
      * 
      * @type {BesuPrivateTransactionConfig}
-     * @memberof InvokeContractV1Request
+     * @memberof InvokeContractKeychainV1Request
      */
     privateTransactionConfig?: BesuPrivateTransactionConfig;
 }
 /**
  * 
  * @export
- * @interface InvokeContractV1Response
+ * @interface InvokeContractKeychainV1Response
  */
-export interface InvokeContractV1Response {
+export interface InvokeContractKeychainV1Response {
     /**
      * 
      * @type {Web3TransactionReceipt}
-     * @memberof InvokeContractV1Response
+     * @memberof InvokeContractKeychainV1Response
      */
     transactionReceipt?: Web3TransactionReceipt;
     /**
      * 
      * @type {any}
-     * @memberof InvokeContractV1Response
+     * @memberof InvokeContractKeychainV1Response
      */
     callOutput?: any | null;
     /**
      * 
      * @type {boolean}
-     * @memberof InvokeContractV1Response
+     * @memberof InvokeContractKeychainV1Response
      */
     success: boolean;
 }
@@ -1423,12 +1423,12 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Invokes a contract on a besu ledger
-         * @param {InvokeContractV1Request} [invokeContractV1Request] 
+         * @param {InvokeContractKeychainV1Request} [invokeContractKeychainV1Request] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        invokeContractV1: async (invokeContractV1Request?: InvokeContractV1Request, options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/plugins/@hyperledger/cactus-plugin-ledger-connector-besu/invoke-contract`;
+        invokeContractKeychainV1: async (invokeContractKeychainV1Request?: InvokeContractKeychainV1Request, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/plugins/@hyperledger/cactus-plugin-ledger-connector-besu/invoke-contract-keychain`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1447,7 +1447,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(invokeContractV1Request, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(invokeContractKeychainV1Request, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1613,12 +1613,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Invokes a contract on a besu ledger
-         * @param {InvokeContractV1Request} [invokeContractV1Request] 
+         * @param {InvokeContractKeychainV1Request} [invokeContractKeychainV1Request] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async invokeContractV1(invokeContractV1Request?: InvokeContractV1Request, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InvokeContractV1Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.invokeContractV1(invokeContractV1Request, options);
+        async invokeContractKeychainV1(invokeContractKeychainV1Request?: InvokeContractKeychainV1Request, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InvokeContractKeychainV1Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.invokeContractKeychainV1(invokeContractKeychainV1Request, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1725,12 +1725,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         /**
          * 
          * @summary Invokes a contract on a besu ledger
-         * @param {InvokeContractV1Request} [invokeContractV1Request] 
+         * @param {InvokeContractKeychainV1Request} [invokeContractKeychainV1Request] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        invokeContractV1(invokeContractV1Request?: InvokeContractV1Request, options?: any): AxiosPromise<InvokeContractV1Response> {
-            return localVarFp.invokeContractV1(invokeContractV1Request, options).then((request) => request(axios, basePath));
+        invokeContractKeychainV1(invokeContractKeychainV1Request?: InvokeContractKeychainV1Request, options?: any): AxiosPromise<InvokeContractKeychainV1Response> {
+            return localVarFp.invokeContractKeychainV1(invokeContractKeychainV1Request, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1848,13 +1848,13 @@ export class DefaultApi extends BaseAPI {
     /**
      * 
      * @summary Invokes a contract on a besu ledger
-     * @param {InvokeContractV1Request} [invokeContractV1Request] 
+     * @param {InvokeContractKeychainV1Request} [invokeContractKeychainV1Request] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public invokeContractV1(invokeContractV1Request?: InvokeContractV1Request, options?: any) {
-        return DefaultApiFp(this.configuration).invokeContractV1(invokeContractV1Request, options).then((request) => request(this.axios, this.basePath));
+    public invokeContractKeychainV1(invokeContractKeychainV1Request?: InvokeContractKeychainV1Request, options?: any) {
+        return DefaultApiFp(this.configuration).invokeContractKeychainV1(invokeContractKeychainV1Request, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

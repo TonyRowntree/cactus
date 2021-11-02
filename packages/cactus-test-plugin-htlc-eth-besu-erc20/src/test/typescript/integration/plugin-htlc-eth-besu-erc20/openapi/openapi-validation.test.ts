@@ -294,7 +294,7 @@ test(testCase, async (t: Test) => {
     });
     t2.ok(deployOutDemo, "deployOutToken is truthy OK");
 
-    const { success } = await connector.invokeContract({
+    const { success } = await connector.invokeContractKeychain({
       contractName: TestTokenJSON.contractName,
       keychainId,
       signingCredential: web3SigningCredential,
@@ -305,7 +305,7 @@ test(testCase, async (t: Test) => {
     });
     t2.equal(success, true, "approve() transactionReceipt.status is true OK");
 
-    const { callOutput } = await connector.invokeContract({
+    const { callOutput } = await connector.invokeContractKeychain({
       contractName: DemoHelperJSON.contractName,
       keychainId,
       signingCredential: web3SigningCredential,
@@ -414,7 +414,7 @@ test(testCase, async (t: Test) => {
   });
 
   test(`${testCase} - ${fRefund} - ${cOk}`, async (t2: Test) => {
-    const responseTxId = await connector.invokeContract({
+    const responseTxId = await connector.invokeContractKeychain({
       contractName: DemoHelperJSON.contractName,
       keychainId,
       signingCredential: web3SigningCredential,
@@ -529,7 +529,7 @@ test(testCase, async (t: Test) => {
       gas: estimatedGas,
     });
 
-    await connector.invokeContract({
+    await connector.invokeContractKeychain({
       contractName: TestTokenJSON.contractName,
       keychainId,
       signingCredential: web3SigningCredential,
@@ -555,7 +555,7 @@ test(testCase, async (t: Test) => {
       gas: estimatedGas,
     });
 
-    const responseTxId = await connector.invokeContract({
+    const responseTxId = await connector.invokeContractKeychain({
       contractName: DemoHelperJSON.contractName,
       keychainId,
       signingCredential: web3SigningCredential,

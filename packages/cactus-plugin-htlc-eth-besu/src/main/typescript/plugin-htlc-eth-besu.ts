@@ -18,7 +18,7 @@ import { WithdrawEndpoint } from "./web-services/withdraw-endpoint";
 import { InitializeEndpoint } from "./web-services/initialize-endpoint";
 import {
   EthContractInvocationType,
-  InvokeContractV1Response,
+  InvokeContractKeychainV1Response,
   PluginLedgerConnectorBesu,
   RunTransactionResponse,
 } from "@hyperledger/cactus-plugin-ledger-connector-besu";
@@ -161,7 +161,7 @@ export class PluginHtlcEthBesu implements ICactusPlugin, IPluginWebService {
 
   public async newContract(
     newContractRequest: NewContractObj,
-  ): Promise<InvokeContractV1Response> {
+  ): Promise<InvokeContractKeychainV1Response> {
     const params = [
       newContractRequest.outputAmount,
       newContractRequest.expiration,
@@ -175,7 +175,7 @@ export class PluginHtlcEthBesu implements ICactusPlugin, IPluginWebService {
       (plugin) => plugin.getInstanceId() == newContractRequest.connectorId,
     ) as PluginLedgerConnectorBesu;
 
-    const result = await connector.invokeContract({
+    const result = await connector.invokeContractKeychain({
       contractName: HashTimeLockJSON.contractName,
       keychainId: newContractRequest.keychainId,
       signingCredential: newContractRequest.web3SigningCredential,
@@ -191,12 +191,12 @@ export class PluginHtlcEthBesu implements ICactusPlugin, IPluginWebService {
 
   public async getSingleStatus(
     req: GetSingleStatusRequest,
-  ): Promise<InvokeContractV1Response> {
+  ): Promise<InvokeContractKeychainV1Response> {
     const connector = this.pluginRegistry.plugins.find(
       (plugin) => plugin.getInstanceId() == req.connectorId,
     ) as PluginLedgerConnectorBesu;
 
-    const result = await connector.invokeContract({
+    const result = await connector.invokeContractKeychain({
       contractName: HashTimeLockJSON.contractName,
       signingCredential: req.web3SigningCredential,
       invocationType: EthContractInvocationType.Call,
@@ -209,12 +209,12 @@ export class PluginHtlcEthBesu implements ICactusPlugin, IPluginWebService {
 
   public async getStatus(
     req: GetStatusRequest,
-  ): Promise<InvokeContractV1Response> {
+  ): Promise<InvokeContractKeychainV1Response> {
     const connector = this.pluginRegistry.plugins.find(
       (plugin) => plugin.getInstanceId() == req.connectorId,
     ) as PluginLedgerConnectorBesu;
 
-    const result = await connector.invokeContract({
+    const result = await connector.invokeContractKeychain({
       contractName: HashTimeLockJSON.contractName,
       signingCredential: req.web3SigningCredential,
       invocationType: EthContractInvocationType.Call,
@@ -227,12 +227,12 @@ export class PluginHtlcEthBesu implements ICactusPlugin, IPluginWebService {
 
   public async refund(
     refundRequest: RefundReq,
-  ): Promise<InvokeContractV1Response> {
+  ): Promise<InvokeContractKeychainV1Response> {
     const connector = this.pluginRegistry.plugins.find(
       (plugin) => plugin.getInstanceId() == refundRequest.connectorId,
     ) as PluginLedgerConnectorBesu;
 
-    const result = await connector.invokeContract({
+    const result = await connector.invokeContractKeychain({
       contractName: HashTimeLockJSON.contractName,
       keychainId: refundRequest.keychainId,
       signingCredential: refundRequest.web3SigningCredential,
@@ -246,12 +246,12 @@ export class PluginHtlcEthBesu implements ICactusPlugin, IPluginWebService {
 
   public async withdraw(
     withdrawRequest: WithdrawReq,
-  ): Promise<InvokeContractV1Response> {
+  ): Promise<InvokeContractKeychainV1Response> {
     const connector = this.pluginRegistry.plugins.find(
       (plugin) => plugin.getInstanceId() == withdrawRequest.connectorId,
     ) as PluginLedgerConnectorBesu;
     const params = [withdrawRequest.id, withdrawRequest.secret];
-    const result = await connector.invokeContract({
+    const result = await connector.invokeContractKeychain({
       contractName: HashTimeLockJSON.contractName,
       keychainId: withdrawRequest.keychainId,
       signingCredential: withdrawRequest.web3SigningCredential,

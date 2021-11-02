@@ -192,7 +192,7 @@ test(testCase, async (t: Test) => {
   t.ok(resp, "response newContract is OK");
   t.equal(resp.status, 200, "response status newContract is OK");
 
-  const { callOutput } = await connector.invokeContract({
+  const { callOutput } = await connector.invokeContractKeychain({
     contractName: DemoHelperJSON.contractName,
     keychainId,
     signingCredential: web3SigningCredential,

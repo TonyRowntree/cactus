@@ -197,7 +197,7 @@ test(testCase, async (t: Test) => {
   t.equal(resp.status, 200, "response status newContract is OK");
 
   t.comment("Get status of HTLC");
-  const responseTxId = await connector.invokeContract({
+  const responseTxId = await connector.invokeContractKeychain({
     contractName: DemoHelperJSON.contractName,
     keychainId,
     signingCredential: web3SigningCredential,
