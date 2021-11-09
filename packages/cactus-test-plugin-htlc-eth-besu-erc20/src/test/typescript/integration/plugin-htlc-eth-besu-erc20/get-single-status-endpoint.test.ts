@@ -203,7 +203,7 @@ test(testCase, async (t: Test) => {
   );
 
   t.comment("Approve 10 Tokens to HashTimeLockAddress");
-  const { success } = await connector.invokeContract({
+  const { success } = await connector.invokeContractKeychain({
     contractName: TestTokenJSON.contractName,
     keychainId,
     signingCredential: web3SigningCredential,
@@ -215,7 +215,7 @@ test(testCase, async (t: Test) => {
   t.equal(success, true, "approve() success is true OK");
 
   t.comment("Get account balance");
-  const responseBalance = await connector.invokeContract({
+  const responseBalance = await connector.invokeContractKeychain({
     contractName: TestTokenJSON.contractName,
     keychainId,
     signingCredential: web3SigningCredential,
@@ -226,7 +226,7 @@ test(testCase, async (t: Test) => {
   t.equal(responseBalance.callOutput, "100", "balance of account is 100 OK");
 
   t.comment("Get HashTimeLock contract and account allowance");
-  const responseAllowance = await connector.invokeContract({
+  const responseAllowance = await connector.invokeContractKeychain({
     contractName: TestTokenJSON.contractName,
     keychainId,
     signingCredential: web3SigningCredential,
@@ -256,7 +256,7 @@ test(testCase, async (t: Test) => {
   t.equal(resNewContract.status, 200, "response status is OK");
 
   t.comment("Get single status of HTLC");
-  const { callOutput } = await connector.invokeContract({
+  const { callOutput } = await connector.invokeContractKeychain({
     contractName: DemoHelperJSON.contractName,
     keychainId,
     signingCredential: web3SigningCredential,

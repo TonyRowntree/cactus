@@ -261,7 +261,7 @@ test(testCase, async (t: Test) => {
       gas: DataTest.estimated_gas,
     });
 
-    const { callOutput } = await connector.invokeContract({
+    const { callOutput } = await connector.invokeContractKeychain({
       contractName: DemoHelperJSON.contractName,
       keychainId,
       signingCredential: web3SigningCredential,
@@ -366,7 +366,7 @@ test(testCase, async (t: Test) => {
   });
 
   test(`${testCase} - ${fRefund} - ${cOk}`, async (t2: Test) => {
-    const responseTxId = await connector.invokeContract({
+    const responseTxId = await connector.invokeContractKeychain({
       contractName: DemoHelperJSON.contractName,
       keychainId,
       signingCredential: web3SigningCredential,
@@ -470,7 +470,7 @@ test(testCase, async (t: Test) => {
     };
     await api.newContractV1(bodyObj);
 
-    const { callOutput } = await connector.invokeContract({
+    const { callOutput } = await connector.invokeContractKeychain({
       contractName: DemoHelperJSON.contractName,
       keychainId,
       signingCredential: web3SigningCredential,
@@ -590,7 +590,7 @@ test(testCase, async (t: Test) => {
     };
     await api.newContractV1(bodyObj);
 
-    const { callOutput } = await connector.invokeContract({
+    const { callOutput } = await connector.invokeContractKeychain({
       contractName: DemoHelperJSON.contractName,
       keychainId,
       signingCredential: web3SigningCredential,
@@ -705,7 +705,7 @@ test(testCase, async (t: Test) => {
     };
     await api.newContractV1(bodyObj);
 
-    const { callOutput } = await connector.invokeContract({
+    const { callOutput } = await connector.invokeContractKeychain({
       contractName: DemoHelperJSON.contractName,
       keychainId,
       signingCredential: web3SigningCredential,

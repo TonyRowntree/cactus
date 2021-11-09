@@ -58,8 +58,8 @@ import {
   DeployContractSolidityBytecodeV1Request,
   DeployContractSolidityBytecodeV1Response,
   EthContractInvocationType,
-  InvokeContractV1Request,
-  InvokeContractV1Response,
+  InvokeContractKeychainV1Request,
+  InvokeContractKeychainV1Response,
   ReceiptType,
   RunTransactionRequest,
   RunTransactionResponse,
@@ -76,7 +76,7 @@ import {
   GetBesuRecordV1Response,
 } from "./generated/openapi/typescript-axios";
 
-import { InvokeContractEndpoint } from "./web-services/invoke-contract-endpoint";
+import { InvokeContractKeychainEndpoint } from "./web-services/invoke-contract-keychain-endpoint";
 import { isWeb3SigningCredentialNone } from "./model-type-guards";
 import { BesuSignTransactionEndpointV1 } from "./web-services/sign-transaction-endpoint-v1";
 import { PrometheusExporter } from "./prometheus-exporter/prometheus-exporter";
@@ -259,7 +259,7 @@ export class PluginLedgerConnectorBesu
       endpoints.push(endpoint);
     }
     {
-      const endpoint = new InvokeContractEndpoint({
+      const endpoint = new InvokeContractKeychainEndpoint({
         connector: this,
         logLevel: this.options.logLevel,
       });
@@ -305,9 +305,9 @@ export class PluginLedgerConnectorBesu
 
     return consensusHasTransactionFinality(currentConsensusAlgorithmFamily);
   }
-  public async invokeContract(
-    req: InvokeContractV1Request,
-  ): Promise<InvokeContractV1Response> {
+  public async invokeContractKeychain(
+    req: InvokeContractKeychainV1Request,
+  ): Promise<InvokeContractKeychainV1Response> {
     const fnTag = `${this.className}#invokeContract()`;
     const contractName = req.contractName;
     let contractInstance: Contract;

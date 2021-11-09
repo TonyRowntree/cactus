@@ -816,7 +816,7 @@
                     }
                 }
             },
-            "InvokeContractV1Request": {
+            "InvokeContractKeychainV1Request": {
                 "type": "object",
                 "required": [
                     "contractName",
@@ -915,7 +915,7 @@
                     }
                 }
             },
-            "InvokeContractV1Response": {
+            "InvokeContractKeychainV1Response": {
                 "type": "object",
                 "required": [
                     "success"
@@ -985,7 +985,7 @@
                 "additionalProperties": false,
                 "properties": {
                     "invokeCall": {
-                        "$ref": "#/components/schemas/InvokeContractV1Request"
+                        "$ref": "#/components/schemas/InvokeContractKeychainV1Request"
                     },
                     "transactionHash": {
                         "type": "string",
@@ -1216,22 +1216,22 @@
                 }
             }
         },
-        "/api/v1/plugins/@hyperledger/cactus-plugin-ledger-connector-besu/invoke-contract": {
+        "/api/v1/plugins/@hyperledger/cactus-plugin-ledger-connector-besu/invoke-contract-keychain": {
             "post": {
                 "x-hyperledger-cactus": {
                     "http": {
                         "verbLowerCase": "post",
-                        "path": "/api/v1/plugins/@hyperledger/cactus-plugin-ledger-connector-besu/invoke-contract"
+                        "path": "/api/v1/plugins/@hyperledger/cactus-plugin-ledger-connector-besu/invoke-contract-keychain"
                     }
                 },
-                "operationId": "invokeContractV1",
+                "operationId": "invokeContractKeychainV1",
                 "summary": "Invokes a contract on a besu ledger",
                 "parameters": [],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/InvokeContractV1Request"
+                                "$ref": "#/components/schemas/InvokeContractKeychainV1Request"
                             }
                         }
                     }
@@ -1242,7 +1242,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/InvokeContractV1Response"
+                                    "$ref": "#/components/schemas/InvokeContractKeychainV1Response"
                                 }
                             }
                         }

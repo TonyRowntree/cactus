@@ -192,7 +192,7 @@ test(testCase, async (t: Test) => {
     .contractAddress as string;
 
   t.comment("Approve 10 Tokens to HashTimeLockAddress");
-  const approveTokensOutput = await besuConnectorApi.invokeContractV1({
+  const approveTokensOutput = await besuConnectorApi.invokeContractKeychainV1({
     contractName: TestTokenJSON.contractName,
     keychainId,
     signingCredential: web3SigningCredential,
@@ -208,7 +208,7 @@ test(testCase, async (t: Test) => {
   );
 
   t.comment("Get account balance");
-  const responseBalance = await besuConnectorApi.invokeContractV1({
+  const responseBalance = await besuConnectorApi.invokeContractKeychainV1({
     contractName: TestTokenJSON.contractName,
     keychainId,
     signingCredential: web3SigningCredential,
@@ -223,7 +223,7 @@ test(testCase, async (t: Test) => {
   );
 
   t.comment("Get HashTimeLock contract and account allowance");
-  const allowanceOutput = await besuConnectorApi.invokeContractV1({
+  const allowanceOutput = await besuConnectorApi.invokeContractKeychainV1({
     contractName: TestTokenJSON.contractName,
     keychainId,
     signingCredential: web3SigningCredential,
@@ -265,7 +265,7 @@ test(testCase, async (t: Test) => {
   );
 
   t.comment("Get HTLC id");
-  const responseTxId = await besuConnectorApi.invokeContractV1({
+  const responseTxId = await besuConnectorApi.invokeContractKeychainV1({
     contractName: DemoHelperJSON.contractName,
     keychainId,
     signingCredential: web3SigningCredential,
@@ -317,7 +317,7 @@ test(testCase, async (t: Test) => {
   t.equal(response3.data.success, true, "response success is true");
 
   t.comment("Get balance of sender account");
-  const responseFinalBalanceSender = await connector.invokeContract({
+  const responseFinalBalanceSender = await connector.invokeContractKeychain({
     contractName: TestTokenJSON.contractName,
     keychainId,
     signingCredential: web3SigningCredential,
@@ -332,7 +332,7 @@ test(testCase, async (t: Test) => {
   );
 
   t.comment("Get balance of receiver account");
-  const responseFinalBalanceReceiver = await connector.invokeContract({
+  const responseFinalBalanceReceiver = await connector.invokeContractKeychain({
     contractName: TestTokenJSON.contractName,
     keychainId,
     signingCredential: web3SigningCredential,

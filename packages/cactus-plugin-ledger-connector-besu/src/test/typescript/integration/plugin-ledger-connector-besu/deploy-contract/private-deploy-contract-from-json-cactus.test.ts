@@ -405,7 +405,7 @@ test(testCase, async (t: Test) => {
 
   {
     t.comment("Checking that private contract cannot be called anonymously");
-    const contractInvocationNoPrivTxConfig = connector1.invokeContract({
+    const contractInvocationNoPrivTxConfig = connector1.invokeContractKeychain({
       contractName: HelloWorldContractJson.contractName,
       contractAbi: HelloWorldContractJson.abi,
       contractAddress: contractDeployReceipt.contractAddress,
@@ -427,7 +427,7 @@ test(testCase, async (t: Test) => {
 
   {
     t.comment("Ensuring member1 can call setName() via connector");
-    const res = await connector1.invokeContract({
+    const res = await connector1.invokeContractKeychain({
       contractName: HelloWorldContractJson.contractName,
       contractAbi: HelloWorldContractJson.abi,
       contractAddress: contractDeployReceipt.contractAddress,
@@ -452,7 +452,7 @@ test(testCase, async (t: Test) => {
     t.comment(
       "Ensuring member1 can call getName() and receive correct value after setName call",
     );
-    const res = await connector1.invokeContract({
+    const res = await connector1.invokeContractKeychain({
       contractName: HelloWorldContractJson.contractName,
       contractAbi: HelloWorldContractJson.abi,
       contractAddress: contractDeployReceipt.contractAddress,
@@ -481,7 +481,7 @@ test(testCase, async (t: Test) => {
     t.comment(
       "Ensuring member2 can call getName() and receive correct value after setName call",
     );
-    const res = await connector2.invokeContract({
+    const res = await connector2.invokeContractKeychain({
       contractName: HelloWorldContractJson.contractName,
       contractAbi: HelloWorldContractJson.abi,
       contractAddress: contractDeployReceipt.contractAddress,
@@ -508,7 +508,7 @@ test(testCase, async (t: Test) => {
 
   {
     t.comment("Checking if member3 can call getName() via connector");
-    const res = await connector3.invokeContract({
+    const res = await connector3.invokeContractKeychain({
       contractName: HelloWorldContractJson.contractName,
       contractAbi: HelloWorldContractJson.abi,
       contractAddress: contractDeployReceipt.contractAddress,

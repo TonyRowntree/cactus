@@ -124,7 +124,7 @@ test("deploys contract via .json file", async (t: Test) => {
       "contractAddress typeof string OK",
     );
 
-    const { callOutput: helloMsg } = await connector.invokeContract({
+    const { callOutput: helloMsg } = await connector.invokeContractKeychain({
       contractName,
       keychainId: keychainPlugin.getKeychainId(),
       invocationType: EthContractInvocationType.Call,
@@ -177,7 +177,7 @@ test("deploys contract via .json file", async (t: Test) => {
 
   test("invoke Web3SigningCredentialType.PrivateKeyHex", async (t2: Test) => {
     const newName = `DrCactus${uuidv4()}`;
-    const setNameOut = await connector.invokeContract({
+    const setNameOut = await connector.invokeContractKeychain({
       contractName,
       keychainId: keychainPlugin.getKeychainId(),
       invocationType: EthContractInvocationType.Send,
@@ -193,7 +193,7 @@ test("deploys contract via .json file", async (t: Test) => {
     t2.ok(setNameOut, "setName() invocation #1 output is truthy OK");
 
     try {
-      const setNameOutInvalid = await connector.invokeContract({
+      const setNameOutInvalid = await connector.invokeContractKeychain({
         contractName,
         keychainId: keychainPlugin.getKeychainId(),
         invocationType: EthContractInvocationType.Send,
@@ -215,7 +215,7 @@ test("deploys contract via .json file", async (t: Test) => {
         "setName() invocation with invalid nonce",
       );
     }
-    const { callOutput: getNameOut } = await connector.invokeContract({
+    const { callOutput: getNameOut } = await connector.invokeContractKeychain({
       contractName,
       keychainId: keychainPlugin.getKeychainId(),
       invocationType: EthContractInvocationType.Call,
@@ -230,7 +230,7 @@ test("deploys contract via .json file", async (t: Test) => {
     });
     t2.equal(getNameOut, newName, `getName() output reflects the update OK`);
 
-    const getNameOut2 = await connector.invokeContract({
+    const getNameOut2 = await connector.invokeContractKeychain({
       contractName,
       keychainId: keychainPlugin.getKeychainId(),
       invocationType: EthContractInvocationType.Send,
@@ -245,7 +245,7 @@ test("deploys contract via .json file", async (t: Test) => {
     });
     t2.ok(getNameOut2, "getName() invocation #2 output is truthy OK");
 
-    const response = await connector.invokeContract({
+    const response = await connector.invokeContractKeychain({
       contractName,
       keychainId: keychainPlugin.getKeychainId(),
       invocationType: EthContractInvocationType.Send,
@@ -261,7 +261,7 @@ test("deploys contract via .json file", async (t: Test) => {
     });
     t2.ok(response, "deposit() payable invocation output is truthy OK");
 
-    const { callOutput } = await connector.invokeContract({
+    const { callOutput } = await connector.invokeContractKeychain({
       contractName,
       keychainId: keychainPlugin.getKeychainId(),
       invocationType: EthContractInvocationType.Call,
@@ -292,7 +292,7 @@ test("deploys contract via .json file", async (t: Test) => {
       type: Web3SigningCredentialType.CactusKeychainRef,
     };
 
-    const setNameOut = await connector.invokeContract({
+    const setNameOut = await connector.invokeContractKeychain({
       contractName,
       keychainId: keychainPlugin.getKeychainId(),
       invocationType: EthContractInvocationType.Send,
@@ -305,7 +305,7 @@ test("deploys contract via .json file", async (t: Test) => {
     t2.ok(setNameOut, "setName() invocation #1 output is truthy OK");
 
     try {
-      const setNameOutInvalid = await connector.invokeContract({
+      const setNameOutInvalid = await connector.invokeContractKeychain({
         contractName,
         keychainId: keychainPlugin.getKeychainId(),
         invocationType: EthContractInvocationType.Send,
@@ -324,7 +324,7 @@ test("deploys contract via .json file", async (t: Test) => {
       );
     }
 
-    const { callOutput: getNameOut } = await connector.invokeContract({
+    const { callOutput: getNameOut } = await connector.invokeContractKeychain({
       contractName,
       keychainId: keychainPlugin.getKeychainId(),
       invocationType: EthContractInvocationType.Call,
@@ -335,7 +335,7 @@ test("deploys contract via .json file", async (t: Test) => {
     });
     t2.equal(getNameOut, newName, `getName() output reflects the update OK`);
 
-    const getNameOut2 = await connector.invokeContract({
+    const getNameOut2 = await connector.invokeContractKeychain({
       contractName,
       keychainId: keychainPlugin.getKeychainId(),
       invocationType: EthContractInvocationType.Send,
@@ -346,7 +346,7 @@ test("deploys contract via .json file", async (t: Test) => {
     });
     t2.ok(getNameOut2, "getName() invocation #2 output is truthy OK");
 
-    const response = await connector.invokeContract({
+    const response = await connector.invokeContractKeychain({
       contractName,
       keychainId: keychainPlugin.getKeychainId(),
       invocationType: EthContractInvocationType.Send,
@@ -358,7 +358,7 @@ test("deploys contract via .json file", async (t: Test) => {
     });
     t2.ok(response, "deposit() payable invocation output is truthy OK");
 
-    const { callOutput: callOut } = await connector.invokeContract({
+    const { callOutput: callOut } = await connector.invokeContractKeychain({
       contractName,
       keychainId: keychainPlugin.getKeychainId(),
       invocationType: EthContractInvocationType.Call,

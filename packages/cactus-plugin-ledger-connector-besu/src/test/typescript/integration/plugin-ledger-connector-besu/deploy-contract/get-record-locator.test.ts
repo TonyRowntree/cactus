@@ -7,7 +7,7 @@ import {
   PluginLedgerConnectorBesu,
   PluginFactoryLedgerConnector,
   ReceiptType,
-  InvokeContractV1Request,
+  InvokeContractKeychainV1Request,
   BesuApiClientOptions,
   BesuApiClient,
   GetBesuRecordV1Request,
@@ -176,7 +176,7 @@ test(testCase, async (t: Test) => {
       "contractAddress typeof string OK",
     );
 
-    const { callOutput: helloMsg } = await connector.invokeContract({
+    const { callOutput: helloMsg } = await connector.invokeContractKeychain({
       contractName: HelloWorldContractJson.contractName,
       contractAbi: HelloWorldContractJson.abi,
       contractAddress,
@@ -232,7 +232,7 @@ test(testCase, async (t: Test) => {
 
   test("getBesuRecord test 2", async (t2: Test) => {
     const newName = `DrCactus${uuidv4()}`;
-    const setNameOut = await connector.invokeContract({
+    const setNameOut = await connector.invokeContractKeychain({
       contractName: HelloWorldContractJson.contractName,
       contractAbi: HelloWorldContractJson.abi,
       contractAddress,
@@ -249,7 +249,7 @@ test(testCase, async (t: Test) => {
     t2.ok(setNameOut, "setName() invocation #1 output is truthy OK");
 
     try {
-      const setNameOutInvalid = await connector.invokeContract({
+      const setNameOutInvalid = await connector.invokeContractKeychain({
         contractName: HelloWorldContractJson.contractName,
         contractAbi: HelloWorldContractJson.abi,
         contractAddress,
@@ -272,7 +272,7 @@ test(testCase, async (t: Test) => {
         "setName() invocation with invalid nonce",
       );
     }
-    const req: InvokeContractV1Request = {
+    const req: InvokeContractKeychainV1Request = {
       contractName: HelloWorldContractJson.contractName,
       contractAbi: HelloWorldContractJson.abi,
       contractAddress,
@@ -291,7 +291,7 @@ test(testCase, async (t: Test) => {
     });
     t2.equal(getNameOut, newName, `getName() output reflects the update OK`);
 
-    const response = await connector.invokeContract({
+    const response = await connector.invokeContractKeychain({
       contractName: HelloWorldContractJson.contractName,
       contractAbi: HelloWorldContractJson.abi,
       contractAddress,
@@ -308,7 +308,7 @@ test(testCase, async (t: Test) => {
     });
     t2.ok(response, "deposit() payable invocation output is truthy OK");
 
-    const req2: InvokeContractV1Request = {
+    const req2: InvokeContractKeychainV1Request = {
       contractName: HelloWorldContractJson.contractName,
       contractAbi: HelloWorldContractJson.abi,
       contractAddress,
