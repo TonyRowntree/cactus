@@ -637,6 +637,122 @@ export interface GetTransactionV1Response {
 /**
  * 
  * @export
+ * @interface InvokeContractJsonObjectV1Request
+ */
+export interface InvokeContractJsonObjectV1Request {
+    /**
+     * 
+     * @type {string}
+     * @memberof InvokeContractJsonObjectV1Request
+     */
+    contractName: string;
+    /**
+     * 
+     * @type {Web3SigningCredential}
+     * @memberof InvokeContractJsonObjectV1Request
+     */
+    signingCredential: Web3SigningCredential;
+    /**
+     * 
+     * @type {EthContractInvocationType}
+     * @memberof InvokeContractJsonObjectV1Request
+     */
+    invocationType: EthContractInvocationType;
+    /**
+     * The name of the contract method to invoke.
+     * @type {string}
+     * @memberof InvokeContractJsonObjectV1Request
+     */
+    methodName: string;
+    /**
+     * The list of arguments to pass in to the contract method being invoked.
+     * @type {Array<any>}
+     * @memberof InvokeContractJsonObjectV1Request
+     */
+    params: Array<any>;
+    /**
+     * The application binary interface of the solidity contract, optional parameter
+     * @type {Array<any>}
+     * @memberof InvokeContractJsonObjectV1Request
+     */
+    contractAbi?: Array<any>;
+    /**
+     * Address of the solidity contract, optional parameter
+     * @type {string}
+     * @memberof InvokeContractJsonObjectV1Request
+     */
+    contractAddress?: string;
+    /**
+     * 
+     * @type {string | number}
+     * @memberof InvokeContractJsonObjectV1Request
+     */
+    value?: string | number;
+    /**
+     * 
+     * @type {string | number}
+     * @memberof InvokeContractJsonObjectV1Request
+     */
+    gas?: string | number;
+    /**
+     * 
+     * @type {string | number}
+     * @memberof InvokeContractJsonObjectV1Request
+     */
+    gasPrice?: string | number;
+    /**
+     * 
+     * @type {number}
+     * @memberof InvokeContractJsonObjectV1Request
+     */
+    nonce?: number;
+    /**
+     * The amount of milliseconds to wait for a transaction receipt beforegiving up and crashing. Only has any effect if the invocation type is SEND
+     * @type {number}
+     * @memberof InvokeContractJsonObjectV1Request
+     */
+    timeoutMs?: number;
+    /**
+     * If not using keychain the contract will be passed here.
+     * @type {string}
+     * @memberof InvokeContractJsonObjectV1Request
+     */
+    contractJson: string;
+    /**
+     * 
+     * @type {BesuPrivateTransactionConfig}
+     * @memberof InvokeContractJsonObjectV1Request
+     */
+    privateTransactionConfig?: BesuPrivateTransactionConfig;
+}
+/**
+ * 
+ * @export
+ * @interface InvokeContractJsonObjectV1Response
+ */
+export interface InvokeContractJsonObjectV1Response {
+    /**
+     * 
+     * @type {Web3TransactionReceipt}
+     * @memberof InvokeContractJsonObjectV1Response
+     */
+    transactionReceipt?: Web3TransactionReceipt;
+    /**
+     * 
+     * @type {any}
+     * @memberof InvokeContractJsonObjectV1Response
+     */
+    callOutput?: any | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InvokeContractJsonObjectV1Response
+     */
+    success: boolean;
+}
+/**
+ * 
+ * @export
  * @interface InvokeContractKeychainV1Request
  */
 export interface InvokeContractKeychainV1Request {
@@ -1423,6 +1539,40 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @summary Invokes a contract on a besu ledger
+         * @param {InvokeContractJsonObjectV1Request} [invokeContractJsonObjectV1Request] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invokeContractJsonObjectV1: async (invokeContractJsonObjectV1Request?: InvokeContractJsonObjectV1Request, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/plugins/@hyperledger/cactus-plugin-ledger-connector-besu/invoke-contract-json-object`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(invokeContractJsonObjectV1Request, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Invokes a contract on a besu ledger
          * @param {InvokeContractKeychainV1Request} [invokeContractKeychainV1Request] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1613,6 +1763,17 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary Invokes a contract on a besu ledger
+         * @param {InvokeContractJsonObjectV1Request} [invokeContractJsonObjectV1Request] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async invokeContractJsonObjectV1(invokeContractJsonObjectV1Request?: InvokeContractJsonObjectV1Request, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InvokeContractJsonObjectV1Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.invokeContractJsonObjectV1(invokeContractJsonObjectV1Request, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Invokes a contract on a besu ledger
          * @param {InvokeContractKeychainV1Request} [invokeContractKeychainV1Request] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1721,6 +1882,16 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         getTransactionV1(getTransactionV1Request?: GetTransactionV1Request, options?: any): AxiosPromise<GetTransactionV1Response> {
             return localVarFp.getTransactionV1(getTransactionV1Request, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Invokes a contract on a besu ledger
+         * @param {InvokeContractJsonObjectV1Request} [invokeContractJsonObjectV1Request] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invokeContractJsonObjectV1(invokeContractJsonObjectV1Request?: InvokeContractJsonObjectV1Request, options?: any): AxiosPromise<InvokeContractJsonObjectV1Response> {
+            return localVarFp.invokeContractJsonObjectV1(invokeContractJsonObjectV1Request, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1843,6 +2014,18 @@ export class DefaultApi extends BaseAPI {
      */
     public getTransactionV1(getTransactionV1Request?: GetTransactionV1Request, options?: any) {
         return DefaultApiFp(this.configuration).getTransactionV1(getTransactionV1Request, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Invokes a contract on a besu ledger
+     * @param {InvokeContractJsonObjectV1Request} [invokeContractJsonObjectV1Request] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public invokeContractJsonObjectV1(invokeContractJsonObjectV1Request?: InvokeContractJsonObjectV1Request, options?: any) {
+        return DefaultApiFp(this.configuration).invokeContractJsonObjectV1(invokeContractJsonObjectV1Request, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
